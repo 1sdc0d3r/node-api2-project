@@ -1,8 +1,9 @@
+require(".env");
 const express = require("express");
 const cors = require("cors");
 const postRoutes = require("./routes/postRoutes");
 
-const port = 5000;
+const port = process.env.PORT;
 
 const server = express();
 server.use(express.json());

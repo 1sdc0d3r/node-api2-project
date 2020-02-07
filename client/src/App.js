@@ -31,7 +31,7 @@ export default class App extends PureComponent {
       editing: {
         ...this.state.editing,
         [evt.target.name]: evt.target.value,
-        updated_at: Date.now()
+        updated_at: new Date().toISOString()
       }
     });
 
