@@ -115,7 +115,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-router.delete("/:id/", (req, res) => {
+router.delete("/:id", (req, res) => {
   db.remove(req.params.id)
     .then(response =>
       !response

@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-wrapper {
+  border: 2px solid rebeccapurple;
+  width: 45%;
+  margin: 1rem auto;
+  text-align: center;
+}
