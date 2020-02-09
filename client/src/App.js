@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import axios from "axios";
 import "./App.css";
+import Form from "./components/Form";
+// import { Route, Switch } from "react-router-dom";
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -20,7 +22,7 @@ export default class App extends PureComponent {
   getPosts = () => {
     console.log("GETTING POSTS");
     axios
-      .get("http://localhost:5000/api/posts")
+      .get("https://node-api-2-project.herokuapp.com/api/posts")
       .then(res => this.setState({ ...this.state, posts: res.data }))
       .catch(err => console.log(err));
   };
@@ -36,15 +38,18 @@ export default class App extends PureComponent {
     });
 
   onSubmitHandler = evt => {
-    // evt.preventDefault();
+    evt.preventDefault();
     this.state.creating
       ? axios
-          .post(`http://localhost:5000/api/posts`, this.state.editing)
+          .post(
+            `https://node-api-2-project.herokuapp.com/api/posts`,
+            this.state.editing
+          )
           .then(res => console.log(res))
           .catch(err => console.log(err))
       : axios
           .put(
-            `http://localhost:5000/api/posts/${this.state.editing.id}`,
+            `https://node-api-2-project.herokuapp.com/api/posts/${this.state.editing.id}`,
             this.state.editing
           )
           .then(res => console.log(res))
@@ -53,7 +58,7 @@ export default class App extends PureComponent {
 
   onDeleteHandler = id =>
     axios
-      .delete(`http://localhost:5000/api/posts/${id}`)
+      .delete(`https://node-api-2-project.herokuapp.com/api/posts/${id}`)
       .then(res => {
         console.log(res);
         this.getPosts();
@@ -102,25 +107,13 @@ export default class App extends PureComponent {
           </>
         );
       }
-    }
+    }   
     return (
-      <form onSubmit={this.onSubmitHandler}>
-        <label>Title: </label>
-        <input
-          name="title"
-          type="text"
-          onChange={this.onChangeHandler}
-          value={this.state.editing.title}
-        />
-        <label>Content: </label>
-        <input
-          name="contents"
-          type="text"
-          onChange={this.onChangeHandler}
-          value={this.state.editing.contents}
-        />
-        <input type="submit" />
-      </form>
+      <Form
+        state={this.state}
+        change={this.onChangeHandler}
+        submit={this.onSubmitHandler}
+      />
     );
   }
 }
