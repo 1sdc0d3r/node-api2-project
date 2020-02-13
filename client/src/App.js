@@ -107,7 +107,7 @@ export default class App extends PureComponent {
           </>
         );
       }
-    }   
+    }
     return (
       <Form
         state={this.state}

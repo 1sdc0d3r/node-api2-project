@@ -57,14 +57,17 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
+  console.log("GET");
   db.findById(id)
-    .then(
-      !post
-        ? res
-            .status(404)
-            .send({ message: "The post with the specified ID does not exist." })
-        : post => res.status(200).send(post)
-    )
+    .then(post => {
+      if (!post) {
+        res
+          .status(404)
+          .send({ message: "The post with the specified ID does not exist." });
+      } else {
+        post => res.status(200).send(post);
+      }
+    })
     .catch(() =>
       res
         .status(500)
